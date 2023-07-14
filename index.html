@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analog Clock</title>
+    <style>
+        .clock {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid#333;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        .hour-hand, .minute-hand, .second-hand {
+            background-color: #333;
+            position: absolute;
+            transform-origin: bottom center;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .hour-hand {
+            width: 8px;
+            height: 70px;
+            left: 96px;
+            top: 30px;
+        }
+
+        .minute-hand {
+            width: 6px;
+            height: 90px;
+            left: 97px;
+            top: 10px;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 100px;
+            left: 99px;
+            top: 0;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hour-hand"></div>
+        <div class="minute-hand"></div>
+        <div class="second-hand"></div>
+    </div>
+
+    <script>
+        function rotateClockHands() {
+            const hourHand = document.querySelector('.hour-hand');
+            const minuteHand = document.querySelector('.minute-hand');
+            const secondHand = document.querySelector('.second-hand');
+
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourRotation = (hours * 30) + (minutes / 2);
+            const minuteRotation = (minutes * 6) + (seconds / 10);
+            const secondRotation = seconds * 6;
+
+            hourHand.style.transform = `rotate(${hourRotation}deg)`;
+            minuteHand.style.transform = `rotate(${minuteRotation}deg)`;
+            secondHand.style.transform = `rotate(${secondRotation}deg)`;
+        }
+
+        setInterval(rotateClockHands, 1000);
+    </script>
+</body>
+</html>
